@@ -1177,6 +1177,64 @@ export default function AdminView({
       {/* ÁREA DE PRODUTOS */}
       {secaoAtiva === 'produtos' && (
         <div className="space-y-8 animate-fade-in">
+          {/* Painel de Ajuste Rápido de Frete */}
+          <div className="bg-slate-900 text-white rounded-3xl p-6 border border-slate-800 relative overflow-hidden shadow-xl">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl -ml-10 -mb-10"></div>
+            
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+              <div className="space-y-1">
+                <h3 className="font-display font-bold text-lg text-white flex items-center gap-2">
+                  <Truck className="w-5 h-5 text-indigo-400" /> Ajuste de Frete Rápido
+                </h3>
+                <p className="text-slate-400 text-xs">Configure os parâmetros de frete do seu catálogo de forma instantânea sem precisar navegar.</p>
+              </div>
+
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                atualizarConfiguracao({
+                  ...formConfig,
+                  taxaEntregaPadrao: parseFloat(String(formConfig.taxaEntregaPadrao)) || 0,
+                  freteGratisMinimo: formConfig.freteGratisMinimo !== undefined ? parseFloat(String(formConfig.freteGratisMinimo)) : undefined
+                });
+                showNotification('success', 'Valores de frete salvos com sucesso!');
+              }} className="flex flex-wrap items-end gap-4 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/50">
+                <div className="space-y-1.5 min-w-[140px]">
+                  <label className="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Frete Fixo (R$)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    required
+                    placeholder="0.00"
+                    value={formConfig.taxaEntregaPadrao}
+                    onChange={(e) => setFormConfig(prev => ({ ...prev, taxaEntregaPadrao: parseFloat(e.target.value) || 0 }))}
+                    className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm text-white transition-all"
+                  />
+                </div>
+
+                <div className="space-y-1.5 min-w-[160px]">
+                  <label className="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Frete Grátis Acima de (R$)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    placeholder="Sem frete grátis"
+                    value={formConfig.freteGratisMinimo === undefined ? '' : formConfig.freteGratisMinimo}
+                    onChange={(e) => setFormConfig(prev => ({ ...prev, freteGratisMinimo: e.target.value ? parseFloat(e.target.value) : undefined }))}
+                    className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm text-white transition-all"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-semibold shadow-md transition-all cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5"
+                >
+                  <Save className="w-4 h-4" />
+                  Salvar Frete
+                </button>
+              </form>
+            </div>
+          </div>
+
           {/* Grid Principal: Formulário + Distribuição Categoria */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Formulário de Adicionar Novo Produto */}
