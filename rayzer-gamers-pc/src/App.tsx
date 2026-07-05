@@ -257,10 +257,7 @@ export default function App() {
     const configuracaoLocal = localStorage.getItem('catalogo_configuracao');
     if (configuracaoLocal) {
       try {
-        const parsed = JSON.parse(configuracaoLocal);
-        if (parsed.nomeLoja !== 'Rayzer Gamers PC') {
-          resetAll = true;
-        }
+        JSON.parse(configuracaoLocal);
       } catch (e) {
         resetAll = true;
       }
