@@ -481,10 +481,14 @@ export default function AdminView({
 
   // Estados para Configurações da Loja
   const [formConfig, setFormConfig] = useState<ConfiguracaoLoja>({ ...configuracao });
+  const [localTaxaEntrega, setLocalTaxaEntrega] = useState<string>(String(configuracao.taxaEntregaPadrao));
+  const [localFreteGratis, setLocalFreteGratis] = useState<string>(configuracao.freteGratisMinimo !== undefined ? String(configuracao.freteGratisMinimo) : '');
 
   // Sincronizar formConfig quando as configurações globais mudarem
   React.useEffect(() => {
     setFormConfig({ ...configuracao });
+    setLocalTaxaEntrega(String(configuracao.taxaEntregaPadrao));
+    setLocalFreteGratis(configuracao.freteGratisMinimo !== undefined ? String(configuracao.freteGratisMinimo) : '');
   }, [configuracao]);
 
   const handleSalvarConfiguracao = (e: React.FormEvent) => {
@@ -496,8 +500,8 @@ export default function AdminView({
 
     atualizarConfiguracao({
       ...formConfig,
-      taxaEntregaPadrao: parseFloat(String(formConfig.taxaEntregaPadrao)) || 0,
-      freteGratisMinimo: formConfig.freteGratisMinimo !== undefined ? parseFloat(String(formConfig.freteGratisMinimo)) : undefined
+      taxaEntregaPadrao: parseFloat(localTaxaEntrega) || 0,
+      freteGratisMinimo: localFreteGratis ? parseFloat(localFreteGratis) : undefined
     });
     showNotification('success', 'Configurações da loja salvas com sucesso!');
   };
@@ -1194,8 +1198,8 @@ export default function AdminView({
                 e.preventDefault();
                 atualizarConfiguracao({
                   ...formConfig,
-                  taxaEntregaPadrao: parseFloat(String(formConfig.taxaEntregaPadrao)) || 0,
-                  freteGratisMinimo: formConfig.freteGratisMinimo !== undefined ? parseFloat(String(formConfig.freteGratisMinimo)) : undefined
+                  taxaEntregaPadrao: parseFloat(localTaxaEntrega) || 0,
+                  freteGratisMinimo: localFreteGratis ? parseFloat(localFreteGratis) : undefined
                 });
                 showNotification('success', 'Valores de frete salvos com sucesso!');
               }} className="flex flex-wrap items-end gap-4 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/50">
@@ -1206,8 +1210,8 @@ export default function AdminView({
                     step="0.01"
                     required
                     placeholder="0.00"
-                    value={formConfig.taxaEntregaPadrao}
-                    onChange={(e) => setFormConfig(prev => ({ ...prev, taxaEntregaPadrao: parseFloat(e.target.value) || 0 }))}
+                    value={localTaxaEntrega}
+                    onChange={(e) => setLocalTaxaEntrega(e.target.value)}
                     className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm text-white transition-all"
                   />
                 </div>
@@ -1218,8 +1222,8 @@ export default function AdminView({
                     type="number"
                     step="0.01"
                     placeholder="Sem frete grátis"
-                    value={formConfig.freteGratisMinimo === undefined ? '' : formConfig.freteGratisMinimo}
-                    onChange={(e) => setFormConfig(prev => ({ ...prev, freteGratisMinimo: e.target.value ? parseFloat(e.target.value) : undefined }))}
+                    value={localFreteGratis}
+                    onChange={(e) => setLocalFreteGratis(e.target.value)}
                     className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm text-white transition-all"
                   />
                 </div>
@@ -2952,8 +2956,8 @@ export default function AdminView({
                         step="0.01"
                         required
                         placeholder="Ex: 15.00"
-                        value={formConfig.taxaEntregaPadrao}
-                        onChange={(e) => setFormConfig(prev => ({ ...prev, taxaEntregaPadrao: parseFloat(e.target.value) || 0 }))}
+                        value={localTaxaEntrega}
+                        onChange={(e) => setLocalTaxaEntrega(e.target.value)}
                         className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm transition-all"
                       />
                     </div>
@@ -2964,8 +2968,8 @@ export default function AdminView({
                         type="number"
                         step="0.01"
                         placeholder="Ex: 150.00"
-                        value={formConfig.freteGratisMinimo === undefined ? '' : formConfig.freteGratisMinimo}
-                        onChange={(e) => setFormConfig(prev => ({ ...prev, freteGratisMinimo: e.target.value ? parseFloat(e.target.value) : undefined }))}
+                        value={localFreteGratis}
+                        onChange={(e) => setLocalFreteGratis(e.target.value)}
                         className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm transition-all"
                       />
                     </div>
