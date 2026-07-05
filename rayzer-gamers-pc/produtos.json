@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1",
+    "nome": "Smartwatch Quantum Pro",
+    "preco": 899.90,
+    "categoria": "Eletrônicos",
+    "descricao": "Monitoramento avançado de saúde, GPS integrado, tela AMOLED de 1.43\" e bateria de longa duração com até 14 dias de autonomia.",
+    "imagem": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&q=80&w=600",
+    "estoque": 15,
+    "destaque": true,
+    "avaliacao": 4.8
+  },
+  {
+    "id": "2",
+    "nome": "Headphone ANC Silence H1",
+    "preco": 549.00,
+    "categoria": "Eletrônicos",
+    "descricao": "Cancelamento ativo de ruído premium, drivers de 40mm para alta fidelidade sonora, conexões multiponto e até 40 horas de reprodução contínua.",
+    "imagem": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=600",
+    "estoque": 24,
+    "destaque": true,
+    "avaliacao": 4.7
+  },
+  {
+    "id": "3",
+    "nome": "Mochila Vanguard Urban",
+    "preco": 299.90,
+    "categoria": "Acessórios",
+    "descricao": "Design minimalista e impermeável, compartimento acolchoado para notebook de até 16\", bolsos antifurto e porta USB externa integrada.",
+    "imagem": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=600",
+    "estoque": 8,
+    "destaque": false,
+    "avaliacao": 4.5
+  }
+]
