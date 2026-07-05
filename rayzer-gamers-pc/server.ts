@@ -16,13 +16,16 @@ app.post("/api/mercado-pago/preference", async (req, res) => {
   try {
     const { items, clientInfo, subtotal, discount, shipping, total } = req.body;
 
-    const accessToken = process.env.MERCADO_PAGO_ACCESS_TOKEN || "APP_USR-1223758203335216-062111-b5c0b0f04cde6cd54661cf11a4556965-3164224855";
+    let accessToken = process.env.MERCADO_PAGO_ACCESS_TOKEN || "";
+    if (!accessToken || accessToken === "APP_USR-1223758203335216-062111-b5c0b0f04cde6cd54661cf11a4556965-316422485") {
+      accessToken = "APP_USR-1223758203335216-062111-b5c0b0f04cde6cd54661cf11a4556965-3164224855";
+    }
 
     // Constrói os nomes dos produtos para descrição
     const productNames = items.map((it: any) => `${it.quantidade}x ${it.produto.nome}`).join(", ");
     const description = `Rayzer Gamers PC - ${productNames}`.substring(0, 100);
 
-    const response = await fetch("https://api.mercadopago.com/v1/preferences", {
+    const response = await fetch("https://api.mercadopago.com/checkout/preferences", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${accessToken}`,
