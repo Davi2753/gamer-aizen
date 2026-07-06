@@ -1,6 +1,0 @@
-{
-  "name": "Rayzer Gamers PC",
-  "description": "Loja virtual Rayzer Gamers PC - Catálogo premium com painel administrativo, gerador de notas fiscais, controle de estoque inteligente e checkout integrado Mercado Pago.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
